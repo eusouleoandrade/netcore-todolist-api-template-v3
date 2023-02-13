@@ -1,5 +1,5 @@
 using AutoMapper;
-using Core.Application.Dtos.Queries;
+using Core.Application.Dtos.Responses;
 using Core.Application.Interfaces.Repositories;
 using Core.Application.Interfaces.UseCases;
 using Core.Domain.Entities;
@@ -20,7 +20,7 @@ namespace Core.Application.UseCases
             _logger = logger;
         }
 
-        public async Task<IReadOnlyList<TodoQuery>?> RunAsync()
+        public async Task<IReadOnlyList<TodoUseCaseResponse>?> RunAsync()
         {
             _logger.LogInformation(message: "Start useCase {0} > method {1}.", nameof(GetAllTodoUseCase), nameof(RunAsync));
 
@@ -28,7 +28,7 @@ namespace Core.Application.UseCases
 
             _logger.LogInformation("Finishes successfully useCase {0} > method {1}.", nameof(GetAllTodoUseCase), nameof(RunAsync));
 
-            return _mapper.Map<IReadOnlyList<TodoQuery>>(entities);
+            return _mapper.Map<IReadOnlyList<TodoUseCaseResponse>>(entities);
         }
     }
 }

@@ -4,7 +4,7 @@ using Lib.Notification.Interfaces;
 
 namespace Core.Application.Interfaces.UseCases
 {
-    public interface ICreateTodoUseCase : INotifiable, IUseCase<CreateTodoUseCaseRequest, CreateTodoUseCaseResponse>
+    public interface ICreateTodoUseCase : INotifiable, IUseCase<CreateTodoUseCaseRequest, TodoUseCaseResponse>
     {
     }
 }

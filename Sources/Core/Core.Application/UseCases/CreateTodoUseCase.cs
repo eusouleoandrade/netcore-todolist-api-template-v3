@@ -22,7 +22,7 @@ namespace Core.Application.UseCases
             _logger = logger;
         }
 
-        public async Task<CreateTodoUseCaseResponse?> RunAsync(CreateTodoUseCaseRequest request)
+        public async Task<TodoUseCaseResponse?> RunAsync(CreateTodoUseCaseRequest request)
         {
             _logger.LogInformation(message: "Start useCase {0} > method {1}.", nameof(CreateTodoUseCase), nameof(RunAsync));
 
@@ -38,7 +38,7 @@ namespace Core.Application.UseCases
 
             _logger.LogInformation("Finishes successfully useCase {0} > method {1}.", nameof(CreateTodoUseCase), nameof(RunAsync));
 
-            return _mapper.Map<CreateTodoUseCaseResponse>(todoRepositoryResponse);
+            return _mapper.Map<TodoUseCaseResponse>(todoRepositoryResponse);
         }
     }
 }

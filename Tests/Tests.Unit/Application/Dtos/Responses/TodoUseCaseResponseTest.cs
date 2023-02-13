@@ -1,9 +1,9 @@
-using Core.Application.Dtos.Queries;
+using Core.Application.Dtos.Responses;
 using FluentAssertions;
 
-namespace Tests.Unit.Application.Dtos.Queries
+namespace Tests.Unit.Application.Dtos.Responses
 {
-    public class GetTodoQueryTest
+    public class TodoUseCaseResponseTest
     {
         /// <summary>
         /// Should execute successfully
@@ -11,7 +11,6 @@ namespace Tests.Unit.Application.Dtos.Queries
         /// <param name="id"></param>
         /// <param name="title"></param>
         /// <param name="done"></param>
-        /// <returns></returns>
         [Theory(DisplayName = "Should execute successfully")]
         [InlineData(1, "Ir ao mercado.", true)]
         [InlineData(2, "Ir ao Dentista.", false)]
@@ -20,16 +19,16 @@ namespace Tests.Unit.Application.Dtos.Queries
         public void ShouldExecuteSuccessfully(int id, string title, bool done)
         {
             // Arranje
-            GetTodoQuery getTodoQuery;
+            TodoUseCaseResponse todoUseCaseResponse; 
 
             // Act
-            getTodoQuery = new GetTodoQuery(id, title, done);
+            todoUseCaseResponse = new TodoUseCaseResponse(id, title, done);
 
             // Assert
-            getTodoQuery.Should().NotBeNull();
-            getTodoQuery.Id.Should().Be(id);
-            getTodoQuery.Title.Should().Be(title);
-            getTodoQuery.Done.Should().Be(done);
+            todoUseCaseResponse.Should().NotBeNull();
+            todoUseCaseResponse.Id.Should().Be(id);
+            todoUseCaseResponse.Title.Should().Be(title);
+            todoUseCaseResponse.Done.Should().Be(done);
         }
     }
 }

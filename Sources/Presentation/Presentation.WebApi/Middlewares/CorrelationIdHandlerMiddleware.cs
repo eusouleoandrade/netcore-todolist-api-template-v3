@@ -1,4 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using Core.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Presentation.WebApi.Options;
@@ -20,10 +22,13 @@ namespace Presentation.WebApi.Middlewares
             _options = options.Value;
         }
 
-        public async Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext httpContext, [FromServices] ICorrelationIdService correlationIdService)
         {
-            if (!httpContext.Request.Headers.TryGetValue(_options.Header, out StringValues correlationId))
-                correlationId = Guid.NewGuid().ToString();
+            // Add correlationId in the service context
+            if (httpContext.Request.Headers.TryGetValue(_options.Header, out StringValues correlationIdInput))
+                correlationIdService.SetCorrelationId(correlationIdInput);
+
+            string correlationId = correlationIdService.GetCorrelationId();
 
             // Add correlationId in the traceIdentifier of httpContext
             httpContext.TraceIdentifier = correlationId;
@@ -32,7 +37,7 @@ namespace Presentation.WebApi.Middlewares
             if (_options.IncludeInResponse)
                 httpContext.Response.OnStarting(() =>
                 {
-                    httpContext.Response.Headers.Add(_options.Header, new[] { correlationId.ToString() });
+                    httpContext.Response.Headers.Add(_options.Header, new[] { correlationId });
                     return Task.CompletedTask;
                 });
 
