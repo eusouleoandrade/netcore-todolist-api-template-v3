@@ -40,9 +40,11 @@ namespace Presentation.WebApi.Controllers.v1
 
             var useCaseResponse = await getAllTodoUseCase.RunAsync();
 
+            var response = _mapper.Map<IReadOnlyList<TodoQuery>>(useCaseResponse);
+
             _logger.LogInformation("Finishes successfully controller {0} > method GetAll.", nameof(TodoController));
 
-            return Ok(new Response<IReadOnlyList<TodoQuery>>(useCaseResponse, true));
+            return Ok(new Response<IReadOnlyList<TodoQuery>>(response, true));
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace Presentation.WebApi.Controllers.v1
         /// <param name="createTodoUseCase"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Response<CreateTodoQuery>))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Response<TodoQuery>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Response))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Response))]
         public async Task<IActionResult> Post([FromBody] CreateTodoRequest request, [FromServices] ICreateTodoUseCase createTodoUseCase)
@@ -67,11 +69,11 @@ namespace Presentation.WebApi.Controllers.v1
                 return BadRequest();
             }
 
-            var response = _mapper.Map<CreateTodoQuery>(useCaseResponse);
+            var response = _mapper.Map<TodoQuery>(useCaseResponse);
 
             _logger.LogInformation("Finishes successfully controller {0} > method {1}.", nameof(TodoController), nameof(Post));
 
-            return Created($"/api/v1/todo/{response.Id}", new Response<CreateTodoQuery>(data: response, succeeded: true));
+            return Created($"/api/v1/todo/{response.Id}", new Response<TodoQuery>(data: response, succeeded: true));
         }
 
         /// <summary>
@@ -108,7 +110,7 @@ namespace Presentation.WebApi.Controllers.v1
         /// <param name="getTodoUseCase"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Response<GetTodoQuery>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Response<TodoQuery>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Response))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Response))]
         public async Task<IActionResult> Get([FromRoute(Name = "id")] int id, [FromServices] IGetTodoUseCase getTodoUseCase)
@@ -123,11 +125,11 @@ namespace Presentation.WebApi.Controllers.v1
                 return BadRequest();
             }
 
-            var response = _mapper.Map<GetTodoQuery>(useCaseResponse);
+            var response = _mapper.Map<TodoQuery>(useCaseResponse);
 
             _logger.LogInformation("Finishes successfully controller {0} > method {1}.", nameof(TodoController), nameof(Get));
 
-            return Ok(new Response<GetTodoQuery>(succeeded: true, data: response));
+            return Ok(new Response<TodoQuery>(succeeded: true, data: response));
         }
 
         /// <summary>

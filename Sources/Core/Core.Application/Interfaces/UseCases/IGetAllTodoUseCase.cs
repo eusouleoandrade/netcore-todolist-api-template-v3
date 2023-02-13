@@ -1,8 +1,8 @@
-using Core.Application.Dtos.Queries;
+using Core.Application.Dtos.Responses;
 
 namespace Core.Application.Interfaces.UseCases
 {
-    public interface IGetAllTodoUseCase : IUseCase<IReadOnlyList<TodoQuery>>
+    public interface IGetAllTodoUseCase : IUseCase<IReadOnlyList<TodoUseCaseResponse>>
     {
     }
 }

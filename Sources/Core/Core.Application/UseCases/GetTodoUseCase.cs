@@ -23,7 +23,7 @@ namespace Core.Application.UseCases
             _logger = logger;
         }
 
-        public async Task<GetTodoUseCaseResponse?> RunAsync(int id)
+        public async Task<TodoUseCaseResponse?> RunAsync(int id)
         {
             _logger.LogInformation(message: "Start useCase {0} > method {1}.", nameof(GetTodoUseCase), nameof(RunAsync));
 
@@ -40,7 +40,7 @@ namespace Core.Application.UseCases
                 return default;
             }
 
-            var useCaseResponse = _mapper.Map<GetTodoUseCaseResponse>(todo);
+            var useCaseResponse = _mapper.Map<TodoUseCaseResponse>(todo);
 
             _logger.LogInformation("Finishes successfully useCase {0} > method {1}.", nameof(GetTodoUseCase), nameof(RunAsync));
 

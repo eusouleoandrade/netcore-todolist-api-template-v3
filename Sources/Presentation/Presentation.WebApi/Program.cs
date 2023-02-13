@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Core.Application.Ioc;
 using Infra.Persistence.Ioc;
+using Infra.Shared.Ioc;
 using Presentation.WebApi.Extensions;
 using Serilog;
 
@@ -19,7 +20,7 @@ namespace Presentation.WebApi
             builder.Host.UseSerilog(Log.Logger);
 
             // Configure services
-            builder.Services.AddPersistenceLayer();
+            builder.Services.AddInfraPersistenceLayer();
             builder.Services.AddApplicationLayer();
             builder.Services.AddControllerExtension();
             builder.Services.AddCors();
@@ -27,6 +28,7 @@ namespace Presentation.WebApi
             builder.Services.AddSwaggerExtension();
             builder.Services.AddNotificationContextExtension();
             builder.Services.AddApiVersioningExtension();
+            builder.Services.AddInfraSharedLayer();
 
             var app = builder.Build();
 

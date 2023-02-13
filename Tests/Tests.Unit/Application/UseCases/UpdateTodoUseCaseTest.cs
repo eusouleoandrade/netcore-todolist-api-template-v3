@@ -55,8 +55,8 @@ namespace Tests.Unit.Application.UseCases
         public async Task ShouldExecuteSuccessfully(int id, string title, bool done)
         {
             // Arranje
-            var getTodoUseCaseResponse = new GetTodoUseCaseResponse(id, title, done);
-            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(getTodoUseCaseResponse);
+            var todoUseCaseResponse = new TodoUseCaseResponse(id, title, done);
+            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(todoUseCaseResponse);
 
             var updateGenericRepositoryAsyncResponse = true;
             _genericRepositoryAsyncMock.Setup(x => x.UpdateAsync(It.IsAny<Todo>())).ReturnsAsync(updateGenericRepositoryAsyncResponse);
@@ -169,8 +169,8 @@ namespace Tests.Unit.Application.UseCases
             var updateGenericRepositoryAsyncResponse = false;
             _genericRepositoryAsyncMock.Setup(x => x.UpdateAsync(It.IsAny<Todo>())).ReturnsAsync(updateGenericRepositoryAsyncResponse);
 
-            var getTodoUseCaseResponse = new GetTodoUseCaseResponse(id, title, done);
-            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(getTodoUseCaseResponse);
+            var todoUseCaseResponse = new TodoUseCaseResponse(id, title, done);
+            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(todoUseCaseResponse);
 
             var updateTodoUseCase = new UpdateTodoUseCase(_genericRepositoryAsyncMock.Object, _getTodoUseCaseMock.Object, _loggerMock.Object);
 

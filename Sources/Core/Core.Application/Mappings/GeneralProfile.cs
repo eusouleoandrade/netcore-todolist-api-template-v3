@@ -12,19 +12,15 @@ namespace Core.Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<Todo, TodoQuery>();
-
             CreateMap<CreateTodoUseCaseRequest, Todo>();
 
-            CreateMap<Todo, CreateTodoUseCaseResponse>();
+            CreateMap<Todo, TodoUseCaseResponse>();
 
             CreateMap<CreateTodoRequest, CreateTodoUseCaseRequest>();
 
-            CreateMap<CreateTodoUseCaseResponse, CreateTodoQuery>();
+            CreateMap<TodoUseCaseResponse, TodoQuery>();
 
-            CreateMap<Todo, GetTodoUseCaseResponse>().ReverseMap();
-
-            CreateMap<GetTodoUseCaseResponse, GetTodoQuery>();
+            CreateMap<Todo, TodoUseCaseResponse>().ReverseMap();
 
             CreateMap<UpdateTodoRequest, UpdateTodoUseCaseRequest>();
         }

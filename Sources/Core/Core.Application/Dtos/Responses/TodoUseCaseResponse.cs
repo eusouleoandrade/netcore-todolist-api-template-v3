@@ -1,6 +1,6 @@
-namespace Core.Application.Dtos.Queries
+namespace Core.Application.Dtos.Responses
 {
-    public class GetTodoQuery
+    public class TodoUseCaseResponse
     {
         public int Id { get; private set; }
 
@@ -8,7 +8,7 @@ namespace Core.Application.Dtos.Queries
 
         public bool Done { get; private set; }
 
-        public GetTodoQuery(int id, string title, bool done)
+        public TodoUseCaseResponse(int id, string title, bool done)
         {
             Id = id;
             Title = title;

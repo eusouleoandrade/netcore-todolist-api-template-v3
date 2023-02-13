@@ -18,7 +18,7 @@ namespace Infra.Persistence.Ioc
             serviceProvider.GetService<DatabaseBootstrap>()?.Setup();
         }
 
-        public static void AddPersistenceLayer(this IServiceCollection services)
+        public static void AddInfraPersistenceLayer(this IServiceCollection services)
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));

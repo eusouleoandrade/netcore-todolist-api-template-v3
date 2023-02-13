@@ -59,8 +59,8 @@ namespace Tests.Unit.Application.UseCases
         public async Task ShouldExecuteSucessfully(int id, string title, bool done)
         {
             // Arranje
-            var getTodoUseCaseResponse = new GetTodoUseCaseResponse(id, title, done);
-            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(getTodoUseCaseResponse);
+            var todoUseCaseResponse = new TodoUseCaseResponse(id, title, done);
+            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(todoUseCaseResponse);
 
             var deleteGenericRepositoryAsyncResponse = true;
             _genericRepositoryAsyncMock.Setup(x => x.DeleteAsync(It.IsAny<Todo>())).ReturnsAsync(deleteGenericRepositoryAsyncResponse);
@@ -97,8 +97,8 @@ namespace Tests.Unit.Application.UseCases
         public async Task ShouldNotExecute_WhenFailedToRemove(int id, string title, bool done)
         {
             // Arranje
-            var getTodoUseCaseResponse = new GetTodoUseCaseResponse(id, title, done);
-            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(getTodoUseCaseResponse);
+            var todoUseCaseResponse = new TodoUseCaseResponse(id, title, done);
+            _getTodoUseCaseMock.Setup(x => x.RunAsync(It.IsAny<int>())).ReturnsAsync(todoUseCaseResponse);
 
             var deleteGenericRepositoryAsyncResponse = false;
             _genericRepositoryAsyncMock.Setup(x => x.DeleteAsync(It.IsAny<Todo>())).ReturnsAsync(deleteGenericRepositoryAsyncResponse);
